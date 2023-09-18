@@ -908,7 +908,8 @@
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .product_preview__button--buy .product_preview__button_text {
+  .product_preview__button--buy .product_preview__button_text,
+  .product_preview__button--pre_order .product_preview__button_text {
     display: none;
   }
   .product_preview__buttons .product_preview__button:before {
@@ -1206,7 +1207,7 @@
     z-index: 1;
     background: #fff;
   }
-  .product_preview__button--pre_order {
+  /*.product_preview__button--pre_order {
     padding: 0;
     line-height: 1px;
   }
@@ -1216,7 +1217,7 @@
     font-weight: 500;
     line-height: 1;
     display: block;
-  }
+  }*/
   body,
   .boxed__description {
     font-size: 13px;

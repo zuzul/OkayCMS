@@ -147,7 +147,17 @@ class GoogleMerchantAdapter extends AbstractPresetAdapter
             $result['g:price']['data'] = $this->xmlFeedHelper->escape($price . ' ' . $this->mainCurrency->code);
         }
 
-        $result['g:availability']['data'] = (!in_array($product->stock, [0, '0'], true) ? 'in stock' : 'out of stock');
+        //$result['g:availability']['data'] = (!in_array($product->stock, [0, '0'], true) ? 'in_stock' : 'out_of_stock');
+        if (is_null($product->stock)) {
+            // під замовлення
+            $result['g:availability']['data'] = 'preorder';
+        }elseif ($product->stock <= 0) {
+            // немає в наявності
+            $result['g:availability']['data'] = 'out_of_stock';
+        }elseif ($product->stock >= 1) {
+            // в наявності
+            $result['g:availability']['data'] = 'in_stock';
+        }
 
         if (!empty($product->brand_name)) {
             $result['g:brand']['data'] = $this->xmlFeedHelper->escape($product->brand_name);

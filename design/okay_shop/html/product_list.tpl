@@ -92,12 +92,12 @@
                             </p>
                     {else}
                         {* Pre-order *}
-                        <button class="product_preview__button product_preview__button--pre_order fn_is_preorder{if $product->variant->stock > 0} hidden-xs-up{/if}" type="submit" data-language="pre_order">
+                        <button class="product_preview__button product_preview__button--pre_order button--blick fa fa-shopping-cart fn_is_preorder{if $product->variant->stock < 50} hidden-xs-up{/if}" type="submit" data-language="pre_order">
                             <span class="product_preview__button_text">{$lang->pre_order}</span>
                         </button>
                     {/if}
                     {* Submit cart button *}
-                    <button class="product_preview__button product_preview__button--buy button--blick fa fa-shopping-cart fn_is_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" type="submit">
+                    <button class="product_preview__button product_preview__button--buy button--blick fa fa-shopping-cart fn_is_stock{if $product->variant->stock == 50 or $product->variant->stock == 0} hidden-xs-up{/if}" aria-label="{$lang->add_to_cart}" type="submit">
                         <span class="product_preview__button_text" data-language="add_to_cart">{$lang->add_to_cart}</span>
                     </button>
 

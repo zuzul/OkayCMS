@@ -145,7 +145,8 @@
                     {* Product available *}
                     <div class="details_boxed__available">
                         <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_not_stock{if $product->variant->stock > 0} hidden-xs-up{/if}" data-language="product_out_of_stock">{$lang->product_out_of_stock}</div>
-                        <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
+                        <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_preorder{if not $product->variant->stock == 50} hidden-xs-up{/if}" data-language="product_preorder">{$lang->product_pre_order}</div>
+                        <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock == 50 or $product->variant->stock == 0} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
                     </div>
                 </div>
 
@@ -168,7 +169,9 @@
                             <span class="hidden">
                                 <link itemprop="url" href="{url_generator route="product" url=$product->url absolute=1}" />
                                 <time itemprop="priceValidUntil" datetime="{$product->created|date:'Ymd'}"></time>
-                                {if $product->variant->stock > 0}
+                                {if $product->variant->stock == $settings->max_order_amount}
+                                <link itemprop="availability" href="http://schema.org/PreOrder" />
+                                {elseif $product->variant->stock > 1}
                                 <link itemprop="availability" href="https://schema.org/InStock" />
                                 {else}
                                 <link itemprop="availability" href="http://schema.org/OutOfStock" />
