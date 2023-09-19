@@ -150,7 +150,9 @@ class GoogleMerchantAdapter extends AbstractPresetAdapter
         //$result['g:availability']['data'] = (!in_array($product->stock, [0, '0'], true) ? 'in_stock' : 'out_of_stock');
         if (is_null($product->stock)) {
             // під замовлення
-            $result['g:availability']['data'] = 'preorder';
+            $result['g:availability']['data'] = 'backorder';
+            $tdatetime = date('c');
+            $result['g:availability_date']['data'] = date('c',strtotime('+1 month', strtotime($tdatetime)));
         }elseif ($product->stock <= 0) {
             // немає в наявності
             $result['g:availability']['data'] = 'out_of_stock';
